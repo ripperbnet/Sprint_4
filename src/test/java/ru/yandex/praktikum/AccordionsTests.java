@@ -11,22 +11,19 @@ import org.openqa.selenium.html5.WebStorage;
 import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertTrue;
 
-
-public class accordionsTests {
+public class AccordionsTests {
 
     private WebDriver webDriver;
-
 
     @Before
     public void setupChrome() {
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
         webDriver.get("https://qa-scooter.praktikum-services.ru/");
     }
 
     @After
-
     public void tearDownChrome() {
         webDriver.manage().deleteAllCookies();
         ((WebStorage) webDriver).getSessionStorage().clear();
@@ -113,7 +110,4 @@ public class accordionsTests {
         mainPage.getTextFromEighthAccordion();
         assertTrue(webDriver.findElement(By.id("accordion__panel-7")).getText().contains("Да, обязательно. Всем самокатов! И Москве, и Московской области."));
     }
-
-
-
 }

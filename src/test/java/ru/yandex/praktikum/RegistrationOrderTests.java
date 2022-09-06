@@ -10,7 +10,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.html5.WebStorage;
 import java.util.concurrent.TimeUnit;
 
-public class registrationOrderTests {
+public class RegistrationOrderTests {
+
     private WebDriver webDriver;
 
     @Before
@@ -22,7 +23,6 @@ public class registrationOrderTests {
     }
 
     @After
-
     public void tearDownChrome() {
         webDriver.manage().deleteAllCookies();
         ((WebStorage) webDriver).getSessionStorage().clear();
@@ -31,22 +31,19 @@ public class registrationOrderTests {
     }
 
     @Test
-    public void orderWithHeaderOrderButton() {   // Заказ по кнопке "Заказать" из хэдера
+    public void orderWithHeaderOrderButton() {  // Заказ по кнопке "Заказать" из хэдера
         MainPage mainPage = new MainPage(webDriver);
         mainPage.clickOnCookieAcceptButton();
         mainPage.clickOnHeaderOrderButton();
         OrderPage orderPage = new OrderPage(webDriver);
-        orderPage.typeName("Иван");
-        orderPage.typeSurname("Иванов");
-        orderPage.typeAddress("ул. советская, д.3, кв. 55");
+        orderPage.customerDate("Иван","Иванов","Ул. Советская, д.3, кв. 55","79253335517");
         orderPage.chooseMetroStation();
-        orderPage.typePhone("+79253557619");
         orderPage.clickOnContinueButton();
         orderPage.clickOnDateField();
         orderPage.chooseDay();
         orderPage.chooseRentalPeriod();
         orderPage.chooseColorGrey();
-        orderPage.typeCommentForCourier("Тестовый комментарий для курьера");
+        orderPage.setCommentForCourier("Тестовый комментарий для курьера");
         orderPage.pressButtonToOrder();
         orderPage.pressNoButton();
         orderPage.pressButtonToOrder();
@@ -55,25 +52,21 @@ public class registrationOrderTests {
         Assert.assertTrue("Order is not created, message not found", isDisplayed);
     }
 
-
     @Test
-    public void orderWithBigOrderButton() {      // Заказ по большой кнопке "Заказать"
+    public void orderWithBigOrderButton() {  // Заказ по большой кнопке "Заказать"
         MainPage mainPage = new MainPage(webDriver);
         mainPage.clickOnCookieAcceptButton();
         mainPage.scrollDownWindow();
         mainPage.clickOnBigOrderButton();
         OrderPage orderPage = new OrderPage(webDriver);
-        orderPage.typeName("ИВАН");
-        orderPage.typeSurname("ИВАНОВ");
-        orderPage.typeAddress( "УЛ. СОВЕТСКАЯ, Д.3, КВ. 55");
+        orderPage.customerDate("ИВАН","ИВАНОВ","УЛ. СОВЕТСКАЯ, Д.3, КВ. 55","79803332211");
         orderPage.chooseMetroStation();
-        orderPage.typePhone("781017754894");
         orderPage.clickOnContinueButton();
         orderPage.clickOnDateField();
         orderPage.chooseDay();
         orderPage.chooseRentalPeriod();
         orderPage.chooseColorBlack();
-        orderPage.typeCommentForCourier("");
+        orderPage.setCommentForCourier("");
         orderPage.pressButtonToOrder();
         orderPage.pressNoButton();
         orderPage.pressButtonToOrder();

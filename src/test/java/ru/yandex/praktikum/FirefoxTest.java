@@ -10,7 +10,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.html5.WebStorage;
 import java.util.concurrent.TimeUnit;
 
-public class firefoxTest {
+public class FirefoxTest {
+
     private WebDriver mozillaDriver;
 
     @Before
@@ -35,23 +36,19 @@ public class firefoxTest {
         mainPage.clickOnCookieAcceptButton();
         mainPage.clickOnHeaderOrderButton();
         OrderPage orderPage = new OrderPage(mozillaDriver);
-        orderPage.typeName("Тестовый");
-        orderPage.typeSurname("Клиент");
-        orderPage.typeAddress("ул. Тестовая, 1, подъезд1, этаж 1, домофон, 1");
+        orderPage.customerDate("Тестовый","Клиент","Улица тестовая, 123","799922233311");
         orderPage.chooseMetroStation();
-        orderPage.typePhone("+79993332211");
         orderPage.clickOnContinueButton();
         orderPage.clickOnDateField();
         orderPage.chooseDay();
         orderPage.chooseRentalPeriod();
         orderPage.chooseColorGrey();
-        orderPage.typeCommentForCourier("Тестовый комментарий для курьера");
+        orderPage.setCommentForCourier("Тестовый комментарий для курьера");
         orderPage.pressButtonToOrder();
         orderPage.pressNoButton();
         orderPage.pressButtonToOrder();
         orderPage.pressYesButton();
         boolean isOrderCreated = orderPage.isOrderCreated();
         Assert.assertTrue("Order is not created, message not found", isOrderCreated);
-
     }
 }

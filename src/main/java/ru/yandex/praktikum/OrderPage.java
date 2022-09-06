@@ -3,8 +3,6 @@ package ru.yandex.praktikum;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-
-
 public class OrderPage extends BasePage {
 
     private By nameField = By.xpath("//input[@placeholder='* Имя']"); // поле ввода имени
@@ -35,53 +33,54 @@ public class OrderPage extends BasePage {
 
     private By finalOrderButton = By.cssSelector("[class='Button_Button__ra12g Button_Middle__1CSJM']"); // кнопка продолжения заказа
 
-
     private By yesButton = By.xpath("//button[@class='Button_Button__ra12g Button_Middle__1CSJM'][text()='Да']"); // кнопка "Да"
 
     private By noButton = By.xpath("//button[text()='Нет']"); // кнопка "Нет"
 
     private By orderCreatedMessage = By.xpath("//button[text()='Посмотреть статус']"); // Кнопка с надписью "Посмотреть статус"
 
-
-
     public OrderPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void typeName(String text) {
+    public void setName(String name) {
 
-        webDriver.findElement(nameField).sendKeys(text);
+        webDriver.findElement(nameField).sendKeys(name);
     }
 
-    public void typeSurname(String text) {
-        webDriver.findElement(surnameField).sendKeys(text);
+    public void setSurname(String surname) {
+
+        webDriver.findElement(surnameField).sendKeys(surname);
     }
 
-    public void typeAddress(String text) {
+    public void setAddress(String address) {
 
-        webDriver.findElement(addressField).sendKeys(text);
+        webDriver.findElement(addressField).sendKeys(address);
     }
 
+    public void setPhone(String phone) {
+
+        webDriver.findElement(phoneField).sendKeys(phone);
+    }
 
     public void chooseMetroStation() {
         webDriver.findElement(metroStationField).click();
         webDriver.findElement(By.className("select-search__select")).click();
     }
 
-    public void typePhone(String text) {
-
-        webDriver.findElement(phoneField).sendKeys(text);
-    }
 
     public void clickOnContinueButton() {
+
         webDriver.findElement(continueButton).click();
     }
 
     public void clickOnDateField() {
+
         webDriver.findElement(dateField).click();
     }
 
     public void chooseDay() {
+
         webDriver.findElement(dayInCalendar).click();
     }
 
@@ -100,24 +99,33 @@ public class OrderPage extends BasePage {
 
     }
 
-    public void typeCommentForCourier(String text) {
-        webDriver.findElement(commentField).sendKeys(text);
+    public void setCommentForCourier(String comment) {
+
+        webDriver.findElement(commentField).sendKeys(comment);
     }
 
     public void pressButtonToOrder() {
+
         webDriver.findElement(finalOrderButton).click();
     }
 
     public void pressNoButton() {
         webDriver.findElement(noButton).click();
-
     }
+
     public void pressYesButton() {
         webDriver.findElement(yesButton).click();
     }
 
     public boolean isOrderCreated() {
-    return webDriver.findElement(orderCreatedMessage).isDisplayed();
+
+        return webDriver.findElement(orderCreatedMessage).isDisplayed();
     }
 
+    public void customerDate(String name, String surname, String address, String phone) {
+        setName(name);
+        setSurname(surname);
+        setAddress(address);
+        setPhone(phone);
+    }
 }
